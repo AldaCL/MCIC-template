@@ -1,0 +1,465 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Intro to LaTeX and Template for Homework Assignments
+%% Quantitative Methods in Political Science
+%% University of Mannheim
+%% Fall 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% created by Marcel Neunhoeffer & Sebastian Sternberg
+
+
+% This template and tutorial will help you to write up your homework. It will also help you to use Latex for other assignments than this course's homework.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Before we get started
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Make an account on overleaf.com and get started. No need to install anything.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Or if you want it the nerdy way...
+% INSTALL LATEX: Before we can get started you need to install LaTeX on your computer.
+				% Windows: http://miktex.org/download
+				% Mac:         http://www.tug.org/mactex/mactex-download.html	
+				% There a many more different LaTeX editors out there for both operating systems. I use TeXworks because it looks the same on Windows and Mac.
+				
+
+% SAVE THE FILE: The first thing you need to do is to save your LaTeX file in a directory as a .tex file. You will not be able to do anything else unless your file is saved. I suggest to save the .tex file in the same folder with your .R script and where you will save your plots from R to. Let's call this file template_homework1.tex and save it in your Week 1 folder.
+
+
+% COMPILE THE FILE: After setting up your file, using your LaTeX editor (texmaker, texshop), you can compile your document using PDFLaTeX.
+	% Compiling your file tells LaTeX to take the code you have written and create a pdf file
+	% After compiling your file, in your directory will appear four new files, including a .pdf file. This is your output document.
+	% It is good to compile your file regularly so that you can see how your code is translating into your document.
+	
+	
+% ERRORS: If you get an error message, something is wrong in your code. Fix errors before they pile up!
+	% As with error messages in R, google the exact error message if you have a question!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Now again for everyone...
+
+% COMMANDS: 
+	% To do anything in LaTeX, you must use commands
+	% Commands tell LaTeX when to start your document, how you want your document to look, and how to format your document
+	% Commands ALWAYS begin with a backslash \
+
+% Everything following the % sign is a comment and will not be used by Latex to compile your document.
+% This is very similar to # comments in R.
+
+% Every .tex file usually consists of four parts.
+% 1. Document Class
+% 2. Packages
+% 3. Header
+% 4. Your Document
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document Class
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ % The first command you will always have will declare your document class. This tells LaTeX what type of document you are creating (article, presentation, poster, etc). 
+% \documentclass is the command
+% in {} you specify the type of document
+% in [] you define additional parameters
+ 
+\documentclass[a4paper,12pt]{article} % This defines the style of your paper
+
+% We usually use the article type. The additional parameters are the format of the paper you want to print it on and the standard font size. For us this is a4paper and 12pt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Packages are libraries of commands that LaTeX can call when compiling the document. With the specialized commands you can customize the formatting of your document.
+% If the packages we call are not installed yet, TeXworks will ask you to install the necessary packages while compiling.
+
+% First, we usually want to set the margins of our document. For this we use the package geometry. We call the package with the \usepackage command. The package goes in the {}, the parameters again go into the [].
+\usepackage[top = 3.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm, headsep=1.75cm]{geometry} 
+
+% Unfortunately, LaTeX has a hard time interpreting German Umlaute. The following two lines and packages should help. If it doesn't work for you please let me know.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[table,xcdraw]{xcolor}
+% The following two packages - multirow and booktabs - are needed to create nice looking tables.
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+
+% As we usually want to include some plots (.pdf files) we need a package for that.
+\usepackage{graphicx} 
+
+% The default setting of LaTeX is to indent new paragraphs. This is useful for articles. But not really nice for homework problem sets. The following command sets the indent to 0.
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+
+% Package to place figures where you want them.
+\usepackage{float}
+\usepackage{lastpage}
+
+% The fancyhdr package let's us create nice headers.
+\usepackage{fancyhdr}
+\usepackage{bm}
+\usepackage{soul}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To make our document nice we want a header and number the pages in the footer.
+\setul{0.5ex}{0.3ex}
+\setulcolor{blue}
+
+\pagestyle{fancy} % With this command we can customize the header style.
+
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+\lhead{ \centering
+Instituto Politécnico Nacional \\
+Centro de investigación en Computación \\
+\doublespacing
+\small Curso de Selección para Ingreso al Posgrado Matemáticas para Ciencias de la Computación
+}% \lhead puts text in the top left corner. \footnotesize sets our font to a smaller size.
+
+%\rhead works just like \lhead (you can also use \chead)
+% \rhead{ Lastname 1, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
+
+% Similar commands work for the footer (\lfoot, \cfoot and \rfoot).
+% We want to put our page number in the center.
+\rfoot{\footnotesize \thepage\ de \pageref{LastPage}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4. Your document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Now, you need to tell LaTeX where your document starts. We do this with the \begin{document} command.
+% Like brackets every \begin{} command needs a corresponding \end{} command. We come back to this later.
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title section of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For the title section we want to reproduce the title section of the Problem Set and add your names.
+
+% \thispagestyle{empty} % This command disables the header on the first page. 
+
+\vspace*{0.1 cm}
+
+% \vspace*{0.3cm} % Now we want to add some vertical space in between the line and our title.
+\textbf{Nombre completo: Jorge Aldair Cortés López}
+\begin{flushright}
+\textbf{Fecha de entrega: }11 de octubre de 2023\\
+\end{flushright}
+ 
+\begin{center} % Everything within the center environment is centered.
+    \vspace{2mm}
+	{\Large \bf Tarea 1: Clasificación } % <---- Don't forget to put in the right number
+	\vspace{1mm}
+\end{center}  
+
+\vspace{0.3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Up until this point you only have to make minor changes for every week (Number of the homework). Your write up essentially starts here.
+
+Usando el método de construir tablas de verdad, clasifique cada una de las siguientes expresiones lógicas como \textbf{Tautología, Contradicción o Contingencia.}
+
+\begin{enumerate}
+
+\item \bm{$q \land \neg((r \land p) \rightarrow q)$}\\\\
+Tabla de verdad en forma canónica:\\
+
+\begin{table}[H]
+\centering
+\bgroup
+\def\arraystretch{1.4}%
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \bm{$q$} & \bm{$r$} & \bm{$(r \land p)$} & \bm{$((r \land p) \rightarrow q)$} & \bm{$\neg((r \land p) \rightarrow q)$} & \bm{$q \land \neg((r \land p) \rightarrow q)$} \\
+\hline
+V & V & V & V & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+V & V & F & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+V & F & V & V & F & V & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+V & F & F & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & V & V & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & V & F & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & F & V & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & F & F & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ 
+\hline
+\end{tabular}\\
+\egroup
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Contradicción.}}
+
+\item \bm{$p \lor (q \land p)$}\\\\
+Tabla de verdad en forma canónica: \\
+
+\begin{table}[H]
+\centering
+\bgroup
+\def\arraystretch{1.4}%
+\begin{tabular}{|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \bm{$q$} & \bm{$q \land p$} & \bm{$p \lor (q \land p)$} \\
+\hline
+V & V & V & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & F & F & \cellcolor[HTML]{c7dcc7}\textbf{F} \\ 
+\hline
+\end{tabular}\\
+\egroup
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Contingencia.}}\\
+
+\item \bm{$p \land (p \rightarrow q) \rightarrow q$ }: \\
+
+Tabla de verdad en forma canónica:
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+    
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \bm{$q$} & \bm{$p \rightarrow q$} & \bm{$p \land (p \rightarrow q)$} & \multicolumn{1}{|c|}{\textbf{\bm{$p \land (p \rightarrow q) \rightarrow q$}}} \\
+\hline
+V & V & V & V & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & V & F & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & V & F & \cellcolor[HTML]{c7dcc7}\textbf{V} \\
+\hline
+\end{tabular}
+    \egroup
+    \label{tab:my_label1}
+\end{table}
+
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}\\
+
+\item \bm{$(q \rightarrow p) \rightarrow (p \rightarrow q)$}:\\
+
+Tabla de verdad en forma canónica:\\
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+    
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \bm{$q$} & \bm{$q \rightarrow p$} & \bm{$p \rightarrow q$} & \multicolumn{1}{|c|}{\textbf{\bm{$(q \rightarrow p) \rightarrow (p \rightarrow q)$}}} \\
+\hline
+V & V & V & V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & V & V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & V & V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\
+\hline
+\end{tabular}
+    \egroup
+    \label{tab:my_label}
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}
+\newpage
+\item \bm{$((r \land (s \lor p)) \rightarrow q) \lor \neg q$}:\\
+
+Tabla de verdad en forma canónica:
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \bm{$q$} & \bm{$r$} & \bm{$s$} & \bm{$s \lor p$} & \bm{$r \land (s \lor p)$}   &\multicolumn{1}{|c|}{\textbf{\bm{$(r \land (s \lor p)) \rightarrow q$}}} & \bm{$\neg q$} &\multicolumn{1}{|c|}{\textbf{\bm{$((r \land (s \lor p)) \rightarrow q) \lor \neg q$}}} \\
+\hline
+V & V & V & V & V & V &  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & V & F &  V& V &  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & F & V &  V&  F&  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & F & F &  V&  F&  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & V & V &  V&  V&  F& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & V & F &  V&  V&  F& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & V &  V&  F&  V& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F &  V&  F&  V& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & V & V &  V&  V&  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & V & F &  F&  F&  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & F & V & V&   F&  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & F & F &  F&  F&  V& F &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & V & V &  V&  V&  F& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & V & F &  F&  F&  V& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & F & V &  V&  F&  V& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & F & F &  F&  F&  V& V &  \cellcolor[HTML]{c7dcc7}\textbf{V} \\
+\hline
+\end{tabular}
+
+    \egroup
+    \label{tab:my_label2}
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}\\
+
+\newpage
+
+\item \bm{$q \rightarrow (\neg p \rightarrow (q \lor \neg p))$} :
+Tabla de verdad en forma canónica:\\
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+
+\bm{$p$} & \bm{$q$} & \multicolumn{1}{|c|}{\textbf{\bm{$\neg p$}}} & \multicolumn{1}{|c|}{\textbf{\bm{$q \lor \neg p$}}} & \bm{$\neg p \rightarrow (q \lor \neg p)$} & \multicolumn{1}{|c|}{\textbf{\bm{$q \rightarrow (\neg p \rightarrow (q \lor \neg p))$}}} \\
+\hline
+V & V & F & V & V & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & F & V & V & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F & V & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F & V & \cellcolor[HTML]{c7dcc7}\textbf{V} \\ 
+
+\hline
+\end{tabular}
+    
+    \egroup
+    \label{tab:my_label3}
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}\\
+\item \bm{$(\neg q \lor (r \rightarrow (s \land t))) \lor (q \rightarrow r)$}: \\
+Tabla de verdad en forma canónica:\\
+
+\begin{table}[H]
+\fontsize{9pt}{9pt}\selectfont
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$q$} & \bm{$r$} & \bm{$s$} & \bm{$t$} & \bm{$\neg q$} &\bm{$s \lor t $} &\bm{$r \rightarrow (s \lor t) $} & \bm{$q \rightarrow r $}&\bm{$\neg q \lor (r \rightarrow (s \land t))$} & \multicolumn{1}{|c|}{\textbf{\bm{$(\neg q \lor (r \rightarrow (s \land t))) \lor (q \rightarrow r)$}}} \\
+\hline
+V & V & V & V & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & V & F & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & F & V & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & V & F & F & V &F &F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & V & V & V &V &V&F&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & V & F & V &V &V&F&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & V & V &V &V&F&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F & V &F &V&F&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & V & V & V &V &V&F&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & V & F & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & F & V & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & F & F & V &F &F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & V & V & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & V & F & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & F & V & V &V &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & F & F & V &F &V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\
+\hline
+\end{tabular}
+
+    \egroup
+    \label{tab:my_label4}
+\end{table}
+
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}\\
+
+\newpage
+\item \bm{$\neg(\neg r \rightarrow ((s \land q) \rightarrow s))$}:\\
+Tabla de verdad en forma canónica:\\
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$r$} & \bm{$s$} & \bm{$q$} & \multicolumn{1}{|c|}{\textbf{\bm{$\neg r$}}} & \bm{$s\land q $}&\bm{$(s \land q) \rightarrow s$}& \bm{$\neg r \rightarrow ((s \land q) \rightarrow s) $}&\multicolumn{1}{|c|}{\textbf{\bm{$\neg(\neg r \rightarrow ((s \land q) \rightarrow s))$}}} \\
+\hline
+V & V & V & F & V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline 
+V & V & F & F & F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+V & F & V & F & F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+V & F & F & F & F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & V & V & V & V&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & V & F & V & F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & F & V & V & F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\ \hline
+F & F & F & V & F&V&V&\cellcolor[HTML]{c7dcc7}\textbf{F} \\
+\hline
+\end{tabular}
+    \egroup
+    \label{tab:my_label5}
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Contradicción.}}\\
+
+
+
+\item \bm{$p \rightarrow (\neg p \rightarrow (p \rightarrow \neg p))$}:\\
+Tabla de verdad en forma canónica:\\
+
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \multicolumn{1}{|c|}{\textbf{\bm{$\neg p$}}}&\bm{$ p \rightarrow \neg p$} & \bm{$ \neg p \rightarrow (p \rightarrow \neg p)$}& \multicolumn{1}{|c|}{\textbf{\bm{$p \rightarrow (\neg p \rightarrow (p \rightarrow \neg p))$}}} \\
+\hline
+V & F&F& V& \cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V&V& V& \cellcolor[HTML]{c7dcc7}\textbf{V} \\
+\hline
+\end{tabular}
+    \egroup
+    \label{tab:my_label6}
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}\\
+
+
+\item \bm{$(p \land (\neg p \lor q)) \rightarrow (p \land q)$}:\\
+Tabla de verdad en forma canónica:\\
+
+\begin{table}[H]
+    \centering
+    \bgroup
+    \def\arraystretch{1.4}%
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{A0A9B7}
+\bm{$p$} & \bm{$q$} & \multicolumn{1}{|c|}{\textbf{\bm{$\neg p$}}} & \multicolumn{1}{|c|}{\textbf{\bm{$\neg p \lor q$}}} & \bm{$ p \land (\neg p \lor q )$} & \bm{$p \land q $}& \multicolumn{1}{|c|}{\textbf{\bm{$(p \land (\neg p \lor q)) \rightarrow (p \land q)$}}} \\
+\hline
+V & V & F & V & V& V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+V & F & F & F & F& V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & V & T & V & F& V&\cellcolor[HTML]{c7dcc7}\textbf{V} \\ \hline
+F & F & T & F & F& F&\cellcolor[HTML]{c7dcc7}\textbf{V} \\
+\hline
+\end{tabular}
+    
+    \egroup
+    \label{tab:my_label7}
+\end{table}
+Por lo que se concluye que la expresión se clasifica como \ul{\textbf{Tautología.}}\\
+
+\end{enumerate}
+
+
+
+
+
+
+\end{document}
